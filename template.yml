@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lamda local demo
+
+Resources:
+  MockedApiGatewayFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: index.handler
+      Runtime: nodejs22.x
+      Environment:
+        Variables:
+          BASE_URL: host.docker.internal
+          PORT: 7080
+          REALM: external-sso
+
+  ApiGatewayFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./dist
+      Handler: index.handler
+      Runtime: nodejs22.x
+      Environment:
+        Variables:
+          BASE_URL: host.docker.internal
+          PORT: 7080
+          REALM: external-sso
+      Events:
+        AUTH:
+          Type: Api
+          Properties:
+            Path: /b2b/auth
+            Method: post

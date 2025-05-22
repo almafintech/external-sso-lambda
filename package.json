@@ -1,0 +1,21 @@
+{
+  "name": "external-sso-lambda",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "make build",
+    "start": "make build && sam local start-api --docker-network host",
+    "zip": "make build && make zip",
+    "trigger-apigateway-event": "make build && sam local invoke -e ./lambda/apigateway_event.json MockedApiGatewayFunction"
+  },
+  "dependencies": {
+    "aws-sdk": "2.1692.0",
+    "axios": "^1.9.0",
+    "typescript": "^5.8.3",
+    "uuid": "11.1.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.149",
+    "@types/node": "^22.15.20"
+  }
+}

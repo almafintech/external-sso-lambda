@@ -1,0 +1,85 @@
+{
+    "body": {
+        "client_id": "<CLIENT_ID_GOES_HERE>",
+        "client_secret": "<CLIENT_SECRET_GOES_HERE>"
+    },
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive",
+        "Content-Length": "101",
+        "Content-Type": "text/plain",
+        "Host": "127.0.0.1:3000",
+        "Postman-Token": "71f945b3-5db5-492f-9b9c-92f34ce2ca8c",
+        "User-Agent": "PostmanRuntime/7.44.0",
+        "X-Forwarded-Port": "3000",
+        "X-Forwarded-Proto": "http"
+    },
+    "httpMethod": "POST",
+    "isBase64Encoded": false,
+    "multiValueHeaders": {
+        "Accept": [
+            "*/*"
+        ],
+        "Accept-Encoding": [
+            "gzip, deflate, br"
+        ],
+        "Connection": [
+            "keep-alive"
+        ],
+        "Content-Length": [
+            "101"
+        ],
+        "Content-Type": [
+            "text/plain"
+        ],
+        "Host": [
+            "127.0.0.1:3000"
+        ],
+        "Postman-Token": [
+            "71f945b3-5db5-492f-9b9c-92f34ce2ca8c"
+        ],
+        "User-Agent": [
+            "PostmanRuntime/7.44.0"
+        ],
+        "X-Forwarded-Port": [
+            "3000"
+        ],
+        "X-Forwarded-Proto": [
+            "http"
+        ]
+    },
+    "multiValueQueryStringParameters": null,
+    "path": "/b2b/auth",
+    "pathParameters": null,
+    "queryStringParameters": null,
+    "requestContext": {
+        "accountId": "123456789012",
+        "apiId": "1234567890",
+        "domainName": "127.0.0.1:3000",
+        "extendedRequestId": null,
+        "httpMethod": "POST",
+        "identity": {
+            "accountId": null,
+            "apiKey": null,
+            "caller": null,
+            "cognitoAuthenticationProvider": null,
+            "cognitoAuthenticationType": null,
+            "cognitoIdentityPoolId": null,
+            "sourceIp": "127.0.0.1",
+            "user": null,
+            "userAgent": "Custom User Agent String",
+            "userArn": null
+        },
+        "path": "/b2b/auth",
+        "protocol": "HTTP/1.1",
+        "requestId": "1dd95c76-9712-4a54-939b-27f2f80a8a08",
+        "requestTime": "21/May/2025:21:22:49 +0000",
+        "requestTimeEpoch": 1747862569,
+        "resourceId": "123456",
+        "resourcePath": "/b2b/auth",
+        "stage": "Prod"
+    },
+    "resource": "/b2b/auth",
+    "stageVariables": null
+}
