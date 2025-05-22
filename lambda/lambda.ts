@@ -52,7 +52,7 @@ export default async (event: APIGatewayProxyEvent, context: Context) => {
 
         return {
             statusCode: 200,
-            body: await JSON.stringify(keycloakResponse)
+            body: JSON.stringify(keycloakResponse)
         }
 
     } catch (error) {
