@@ -24,9 +24,9 @@ export default async (event: APIGatewayProxyEvent, context: Context) => {
         console.log('client_id:', client_id)
         console.log('client_secret:', client_secret)
 
-        const BASE_URL: string | undefined = process.env.BASE_URL
-        const PORT: string | undefined = process.env.PORT
-        const REALM: string | undefined = process.env.REALM
+        const BASE_URL: string | undefined = process.env.KC_BASE_URL
+        const PORT: string | undefined = process.env.KC_PORT
+        const REALM: string | undefined = process.env.KC_REALM
         const HOST = `http://${BASE_URL}:${PORT}/realms/${REALM}/protocol/openid-connect/token`
 
         // use the correct Keycloak endpoint accessible from Lambda

@@ -24,9 +24,9 @@ Resources:
       Runtime: nodejs22.x
       Environment:
         Variables:
-          BASE_URL: host.docker.internal
-          PORT: 7080
-          REALM: external-sso
+          KC_BASE_URL: host.docker.internal
+          KC_PORT: 7080
+          KC_REALM: external-sso
       Events:
         AUTH:
           Type: Api
