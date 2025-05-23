@@ -8,9 +8,6 @@ export default async (event: APIGatewayProxyEvent, context: Context) => {
     const HOST = `http://${BASE_URL}:${PORT}/realms/${REALM}/protocol/openid-connect/token`
 
     try {
-        // log the received event
-        console.log('Received event:', JSON.stringify(event, null, 2))
-
         const maybeRequestBody: string | null = event.body
 
         // Check if the body is null
