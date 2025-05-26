@@ -48,3 +48,4 @@ node_modules/
 
 # dist
 dist/
+lambda_function_payload.zip

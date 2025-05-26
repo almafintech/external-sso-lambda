@@ -4,7 +4,7 @@ export default async (event: APIGatewayProxyEvent, context: Context) => {
 
     const BASE_URL: string | undefined = process.env.KC_BASE_URL
     const REALM: string | undefined = process.env.KC_REALM
-    const HOST = `http://${BASE_URL}/realms/${REALM}/protocol/openid-connect/token`
+    const HOST = `${BASE_URL}/realms/${REALM}/protocol/openid-connect/token`
 
     try {
         const maybeRequestBody: string | null = event.body
