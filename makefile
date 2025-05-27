@@ -13,8 +13,10 @@ _cp_dependencies:
 	
 zip:
 	rm -rf ./lambda_function_payload.zip
-	# // need to zip al root files in dist to a zip file named ./lambda_function_payload.zip.
+	make build
 	cd dist && zip -r ../lambda_function_payload.zip ./*
+	cd ..
+	rm -rf ./dist
 
 build: 
 	make clean
