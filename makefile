@@ -18,8 +18,12 @@ zip:
 	cd ..
 	rm -rf ./dist
 
+prettier: 
+	npx prettier --write ./dist
+
 build: 
 	make clean
 	make ts
 	make _cp_packages
 	make _cp_dependencies
+	make prettier
