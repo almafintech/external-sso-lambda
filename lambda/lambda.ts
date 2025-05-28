@@ -1,28 +1,29 @@
-import { APIGatewayProxyEvent, Context } from "aws-lambda"
-
-export default async (event: APIGatewayProxyEvent, context: Context) => {
-
+export default async (event, context) => {
     const BASE_URL: string | undefined = process.env.KC_BASE_URL
     const REALM: string | undefined = process.env.KC_REALM
-    const HOST = `${BASE_URL}/realms/${REALM}/protocol/openid-connect/token`
+    const HOST: string | undefined = `${BASE_URL}/realms/${REALM}/protocol/openid-connect/token`
 
     try {
-        const maybeRequestBody: string | null = event.body
 
-        // Check if the body is null
-        if (maybeRequestBody === null) {
-            throw new Error("Request body is null")
+        if (!event.body) {
+            throw new Error("Request body is null or undefined")
         }
 
-        let parsedBody: any
-        if (typeof maybeRequestBody === "string") {
-            parsedBody = JSON.parse(maybeRequestBody)
-        } else {
-            parsedBody = maybeRequestBody
+        // Decodificar base64 si es necesario
+        let rawBody = event.body
+        if (event.isBase64Encoded) {
+            rawBody = Buffer.from(event.body, 'base64').toString('utf-8')
         }
+
+        // Parsear JSON
+        const parsedBody = JSON.parse(rawBody)
         const { client_id, client_secret } = parsedBody
 
-        // use the correct Keycloak endpoint accessible from Lambda
+        if (!client_id || !client_secret) {
+            throw new Error("Missing client_id or client_secret in request body")
+        }
+
+        // Enviar request a Keycloak
         const response = await fetch(HOST, {
             method: "POST",
             headers: {
@@ -30,29 +31,32 @@ export default async (event: APIGatewayProxyEvent, context: Context) => {
             },
             body: new URLSearchParams({
                 grant_type: "client_credentials",
-                client_id: client_id,
-                client_secret: client_secret
+                client_id,
+                client_secret
             }).toString()
         })
 
-        // Check if the response is ok
         if (!response.ok) {
-            console.error('Error response from Keycloak:', response.statusText)
-            throw new Error('Unable to fetch access token')
+            const errorText = await response.text()
+            console.error('Error response from Keycloak:', errorText)
+            throw new Error(`Unable to fetch access token: ${response.status} - ${errorText}`)
         }
 
         const keycloakResponse = await response.json()
-
         return {
             statusCode: 200,
             body: JSON.stringify(keycloakResponse)
         }
 
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error processing request:', error)
         return {
             statusCode: 500,
-            body: JSON.stringify({ message: 'Error processing request' })
+            body: JSON.stringify({
+                message: 'Error processing request',
+                details: error.message,
+                stack: error.stack
+            })
         }
     }
 }
